@@ -1,0 +1,14 @@
+#container{
+  position: fixed; /* stays in place even on scroll or DOM changes */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, 1100%); /* centers the element perfectly */
+  display: flex;
+  width: 50%;
+  gap: 10px; /* optional: spacing between input and button */
+}
+
+h1{
+    text-align: center;
+    padding-top: 40px;
+}
