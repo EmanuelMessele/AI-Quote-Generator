@@ -2,31 +2,43 @@ import "./QuoteCard.css";
 import { useState } from "react";
 
 const QuoteCard = () => {
-  const [question, setQuestion] = useState<string>("");
+  const [quote, setQuote] = useState<string>("");
 
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setQuestion(event.target.value);
-  };
+  /* const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    // updates as user types in the text area
+    setQuestion(event.target.value); // when user types, the event is passed into the function as a parameter , and event.target.value is the text of that input element being changed
+  }; */
 
-  const handleSubmit = () => {
-    // Here you can handle the form submission, e.g., send the question to an API
-    console.log(question); // we want this to send to the API at some point
+  const handleGenerate = async () => {
+    try {
+      const quote = await fetch("https://catfact.ninja/fact", {
+        method: "GET", // just trying to get some thing working to see if its a code issue or a API, network issue
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!quote.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const data = await quote.json();
+      setQuote(data.content); // sets the quote state with the content from the API response
+      console.log(data.content); // logs the quote to the console
+    } catch (error) {
+      console.error("Error fetching quote:", error);
+      setQuote("Failed to fetch quote. Please try again later.");
+    }
   };
 
   return (
     <>
       <h1>Quote Generator</h1>
       <div id="container">
-        <input
-          type="text"
-          className="form-control"
-          value={question}
-          onChange={handleInputChange}
-        ></input>
         <button
           type="submit"
           className="btn btn-primary"
-          onClick={handleSubmit}
+          onClick={handleGenerate}
         >
           Generate
         </button>
