@@ -1,11 +1,10 @@
 #container{
   position: fixed; /* stays in place even on scroll or DOM changes */
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -90%); /* centers the element perfectly */
   display: flex;
-  width: 50%;
-  gap: 10px; /* optional: spacing between input and button */
+  justify-content: center;
+  align-items: center;
+  width: 100%; /* make sure it cover full width of the vp */
+  height: 100vh; /* makes sure it covers full viewport height */
 }
 
 h1{

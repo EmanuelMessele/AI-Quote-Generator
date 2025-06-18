@@ -11,7 +11,7 @@ const QuoteCard = () => {
 
   const handleGenerate = async () => {
     try {
-      const quote = await fetch("https://catfact.ninja/fact", {
+      const quote = await fetch("https://api.quotable.io/random", {
         method: "GET", // just trying to get some thing working to see if its a code issue or a API, network issue
         headers: {
           "Content-Type": "application/json",
@@ -34,6 +34,9 @@ const QuoteCard = () => {
   return (
     <>
       <h1>Quote Generator</h1>
+
+      <p>{quote}</p>
+
       <div id="container">
         <button
           type="submit"
